@@ -28,9 +28,9 @@ function fish_prompt
 
         set -l git_branch (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
         set -l git_dirty (command git status -s --ignore-submodules=dirty 2> /dev/null)
-        set -l git_changed (command git whatchanged -1 --format=oneline | tail -n +2 | wc -l)
+        set -l git_changed (command git status | grep 'geändert:' | wc -l)
         if test $git_changed -gt 0
-            set git_meta "$git_meta$git_changed"
+            set git_meta "$git_meta~$git_changed"
         end
         if test -n "$git_branch"
             if test -n "$git_dirty"
