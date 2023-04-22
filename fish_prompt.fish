@@ -28,13 +28,25 @@ function fish_prompt
 
         set -l git_branch (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
         set -l git_dirty (command git status -s --ignore-submodules=dirty 2> /dev/null)
+        set -l git_changed (command git whatchanged -1 --format=oneline | tail -n +2 | wc -l)
+        if test $git_changed -gt 0
+            set git_meta "$git_meta ~$git_changed"
+        end
         if test -n "$git_branch"
             if test -n "$git_dirty"
+                set_color yellow
+                echo -n ""
                 set_color black -b yellow
-                echo -n "  $git_branch$git_meta " 
+                echo -n " $git_branch$git_meta" 
+                set_color yellow -b black
+                echo -n ""
             else
+                set_color green
+                echo -n ""
                 set_color black -b green
-                echo -n "  $git_branch$git_meta "
+                echo -n " $git_branch$git_meta"
+                set_color green -b black
+                echo -n ""
             end
         end
     end
@@ -46,18 +58,30 @@ function fish_prompt
     switch $fishvimode
         case "insert"
         case "visual"
+            set_color magenta 
+            echo -n ""
             set_color black -b magenta
-            echo -n "  Insert "
+            echo -n " Insert"
+            set_color magenta -b black
+            echo -n ""
             set_color normal
-            echo -n " "
+            echo -ne" "
         case "replace"
+            set_color red 
+            echo -n ""
             set_color black -b red
-            echo -n "  Replace "
+            echo -n " Replace"
+            set_color red -b black
+            echo -n ""
             set_color normal
             echo -n " "
         case default
+            set_color blue 
+            echo -n ""
             set_color black -b blue
             echo -n "  Normal "
+            set_color blue -b black
+            echo -n ""
             set_color normal
             echo -n " "
     end
