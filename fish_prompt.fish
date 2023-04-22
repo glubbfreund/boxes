@@ -61,7 +61,7 @@ function fish_prompt
         case "insert"
         case "visual"
             set_color magenta 
-            echo -n ""
+            echo -n " "
             set_color black -b magenta
             echo -n "  Visual "
             set_color magenta -b black
@@ -70,7 +70,7 @@ function fish_prompt
             echo -ne" "
         case "replace"
             set_color red 
-            echo -n ""
+            echo -n " "
             set_color black -b red
             echo -n "  Replace "
             set_color red -b black
@@ -79,7 +79,7 @@ function fish_prompt
             echo -n " "
         case default
             set_color blue 
-            echo -n ""
+            echo -n " "
             set_color black -b blue
             echo -n "  Normal "
             set_color blue -b black
