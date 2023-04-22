@@ -6,9 +6,11 @@ function fish_prompt
     if not test $last_status -eq 0
         set_color --bold red
     else
-        set_color --bold magenta
+        set_color --bold green 
     end
-    echo -n (basename $cwd) ""  
+    echo -n "   " 
+    set_color --bold magenta
+    echo -n (basename $cwd)  
     set_color normal
 
 
@@ -35,14 +37,14 @@ function fish_prompt
         if test -n "$git_branch"
             if test -n "$git_dirty"
                 set_color yellow
-                echo -n ""
+                echo -n " "
                 set_color black -b yellow
                 echo -n " $git_branch $git_meta" 
                 set_color yellow -b black
                 echo -n ""
             else
                 set_color green
-                echo -n ""
+                echo -n " "
                 set_color black -b green
                 echo -n " $git_branch $git_meta"
                 set_color green -b black
