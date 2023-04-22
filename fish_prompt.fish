@@ -19,10 +19,10 @@ function fish_prompt
             set -l behind (echo $commit_count | cut -f 1)
             set -l ahead (echo $commit_count | cut -f 2)
             if test $behind -gt 0
-                set git_meta " "
+                set git_meta ""
             end
             if test $ahead -gt 0
-                set git_meta " "
+                set git_meta ""
             end
         end
 
@@ -30,21 +30,21 @@ function fish_prompt
         set -l git_dirty (command git status -s --ignore-submodules=dirty 2> /dev/null)
         set -l git_changed (command git whatchanged -1 --format=oneline | tail -n +2 | wc -l)
         if test $git_changed -gt 0
-            set git_meta "$git_meta ~$git_changed"
+            set git_meta "$git_meta$git_changed"
         end
         if test -n "$git_branch"
             if test -n "$git_dirty"
                 set_color yellow
                 echo -n ""
                 set_color black -b yellow
-                echo -n " $git_branch$git_meta" 
+                echo -n " $git_branch $git_meta" 
                 set_color yellow -b black
                 echo -n ""
             else
                 set_color green
                 echo -n ""
                 set_color black -b green
-                echo -n " $git_branch$git_meta"
+                echo -n " $git_branch $git_meta"
                 set_color green -b black
                 echo -n ""
             end
