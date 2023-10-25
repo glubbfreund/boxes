@@ -8,6 +8,7 @@ function fish_prompt
     else
         set_color --bold green 
     end
+    echo ""
     echo -n "   " 
     set_color --bold magenta
     echo -n (basename $cwd)  
