@@ -38,9 +38,11 @@ function fish_prompt
         end
         if test -n "$git_branch"
             if test -n "$git_dirty"
+                echo -n " "
                 set_color black -b yellow
                 echo -n "  $git_branch $git_meta " 
             else
+                echo -n " "
                 set_color black -b green
                 echo -n "  $git_branch $git_meta "
             end
@@ -54,20 +56,20 @@ function fish_prompt
     switch $fishvimode
         case "insert"
         case "visual"
+            echo -n " "
             set_color black -b magenta
             echo -n "  Visual "
             set_color normal
-            echo -ne" "
         case "replace"
+            echo -n " "
             set_color black -b red
             echo -n "  Replace "
             set_color normal
-            echo -n " "
         case default
+            echo -n " "
             set_color black -b blue
             echo -n "  Normal "
             set_color normal
-            echo -n " "
     end
     set_color normal
     echo -n " "
